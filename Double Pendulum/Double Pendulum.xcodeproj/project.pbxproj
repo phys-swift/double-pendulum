@@ -13,6 +13,7 @@
 		506039FE202BBAA100FC0A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 506039FD202BBAA100FC0A72 /* Assets.xcassets */; };
 		50603A01202BBAA100FC0A72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506039FF202BBAA100FC0A72 /* LaunchScreen.storyboard */; };
 		50603A0D202BBC7500FC0A72 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0C202BBC7500FC0A72 /* StyleKit.swift */; };
+		50603A0F202BBDB700FC0A72 /* PendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0E202BBDB700FC0A72 /* PendulumView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		50603A00202BBAA100FC0A72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50603A02202BBAA100FC0A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50603A0C202BBC7500FC0A72 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		50603A0E202BBDB700FC0A72 /* PendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendulumView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				506039F6202BBAA100FC0A72 /* AppDelegate.swift */,
 				506039F8202BBAA100FC0A72 /* ViewController.swift */,
+				50603A0E202BBDB700FC0A72 /* PendulumView.swift */,
 				506039FA202BBAA100FC0A72 /* Main.storyboard */,
 				506039FF202BBAA100FC0A72 /* LaunchScreen.storyboard */,
 				50603A02202BBAA100FC0A72 /* Info.plist */,
@@ -141,6 +144,7 @@
 			files = (
 				50603A0D202BBC7500FC0A72 /* StyleKit.swift in Sources */,
 				506039F9202BBAA100FC0A72 /* ViewController.swift in Sources */,
+				50603A0F202BBDB700FC0A72 /* PendulumView.swift in Sources */,
 				506039F7202BBAA100FC0A72 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
