@@ -42,47 +42,47 @@ public class StyleKit : NSObject {
         context.scaleBy(x: resizedFrame.width / 164, y: resizedFrame.height / 32)
 
 
-        //// Bezier Drawing
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 129, y: 19))
-        bezierPath.addLine(to: CGPoint(x: 87, y: 19))
-        bezierPath.addCurve(to: CGPoint(x: 84, y: 16), controlPoint1: CGPoint(x: 85.34, y: 19), controlPoint2: CGPoint(x: 84, y: 17.66))
-        bezierPath.addCurve(to: CGPoint(x: 87, y: 13), controlPoint1: CGPoint(x: 84, y: 14.34), controlPoint2: CGPoint(x: 85.34, y: 13))
-        bezierPath.addLine(to: CGPoint(x: 129, y: 13))
-        bezierPath.addCurve(to: CGPoint(x: 132, y: 16), controlPoint1: CGPoint(x: 130.66, y: 13), controlPoint2: CGPoint(x: 132, y: 14.34))
-        bezierPath.addCurve(to: CGPoint(x: 129, y: 19), controlPoint1: CGPoint(x: 132, y: 17.66), controlPoint2: CGPoint(x: 130.66, y: 19))
-        bezierPath.close()
-        bezierPath.move(to: CGPoint(x: 77, y: 19))
-        bezierPath.addLine(to: CGPoint(x: 35, y: 19))
-        bezierPath.addCurve(to: CGPoint(x: 32, y: 16), controlPoint1: CGPoint(x: 33.34, y: 19), controlPoint2: CGPoint(x: 32, y: 17.66))
-        bezierPath.addCurve(to: CGPoint(x: 35, y: 13), controlPoint1: CGPoint(x: 32, y: 14.34), controlPoint2: CGPoint(x: 33.34, y: 13))
-        bezierPath.addLine(to: CGPoint(x: 77, y: 13))
-        bezierPath.addCurve(to: CGPoint(x: 80, y: 16), controlPoint1: CGPoint(x: 78.66, y: 13), controlPoint2: CGPoint(x: 80, y: 14.34))
-        bezierPath.addCurve(to: CGPoint(x: 77, y: 19), controlPoint1: CGPoint(x: 80, y: 17.66), controlPoint2: CGPoint(x: 78.66, y: 19))
-        bezierPath.close()
-        bezierPath.move(to: CGPoint(x: 16, y: 23))
-        bezierPath.addCurve(to: CGPoint(x: 9, y: 16), controlPoint1: CGPoint(x: 12.13, y: 23), controlPoint2: CGPoint(x: 9, y: 19.87))
-        bezierPath.addCurve(to: CGPoint(x: 16, y: 9), controlPoint1: CGPoint(x: 9, y: 12.13), controlPoint2: CGPoint(x: 12.13, y: 9))
-        bezierPath.addCurve(to: CGPoint(x: 23, y: 16), controlPoint1: CGPoint(x: 19.87, y: 9), controlPoint2: CGPoint(x: 23, y: 12.13))
-        bezierPath.addCurve(to: CGPoint(x: 16, y: 23), controlPoint1: CGPoint(x: 23, y: 19.87), controlPoint2: CGPoint(x: 19.87, y: 23))
-        bezierPath.close()
-        bezierPath.move(to: CGPoint(x: 148, y: 0))
-        bezierPath.addCurve(to: CGPoint(x: 134.16, y: 8), controlPoint1: CGPoint(x: 142.08, y: 0), controlPoint2: CGPoint(x: 136.93, y: 3.22))
-        bezierPath.addLine(to: CGPoint(x: 29.84, y: 8))
-        bezierPath.addCurve(to: CGPoint(x: 16, y: 0), controlPoint1: CGPoint(x: 27.07, y: 3.22), controlPoint2: CGPoint(x: 21.92, y: 0))
-        bezierPath.addCurve(to: CGPoint(x: 0, y: 16), controlPoint1: CGPoint(x: 7.16, y: 0), controlPoint2: CGPoint(x: 0, y: 7.16))
-        bezierPath.addCurve(to: CGPoint(x: 16, y: 32), controlPoint1: CGPoint(x: 0, y: 24.84), controlPoint2: CGPoint(x: 7.16, y: 32))
-        bezierPath.addCurve(to: CGPoint(x: 29.84, y: 24), controlPoint1: CGPoint(x: 21.92, y: 32), controlPoint2: CGPoint(x: 27.07, y: 28.78))
-        bezierPath.addLine(to: CGPoint(x: 134.16, y: 24))
-        bezierPath.addCurve(to: CGPoint(x: 148, y: 32), controlPoint1: CGPoint(x: 136.93, y: 28.78), controlPoint2: CGPoint(x: 142.08, y: 32))
-        bezierPath.addCurve(to: CGPoint(x: 164, y: 16), controlPoint1: CGPoint(x: 156.84, y: 32), controlPoint2: CGPoint(x: 164, y: 24.84))
-        bezierPath.addCurve(to: CGPoint(x: 148, y: 0), controlPoint1: CGPoint(x: 164, y: 7.16), controlPoint2: CGPoint(x: 156.84, y: 0))
-        bezierPath.close()
+        //// Pendulum Body Drawing
+        let pendulumBodyPath = UIBezierPath()
+        pendulumBodyPath.move(to: CGPoint(x: 129, y: 19))
+        pendulumBodyPath.addLine(to: CGPoint(x: 87, y: 19))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 84, y: 16), controlPoint1: CGPoint(x: 85.34, y: 19), controlPoint2: CGPoint(x: 84, y: 17.66))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 87, y: 13), controlPoint1: CGPoint(x: 84, y: 14.34), controlPoint2: CGPoint(x: 85.34, y: 13))
+        pendulumBodyPath.addLine(to: CGPoint(x: 129, y: 13))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 132, y: 16), controlPoint1: CGPoint(x: 130.66, y: 13), controlPoint2: CGPoint(x: 132, y: 14.34))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 129, y: 19), controlPoint1: CGPoint(x: 132, y: 17.66), controlPoint2: CGPoint(x: 130.66, y: 19))
+        pendulumBodyPath.close()
+        pendulumBodyPath.move(to: CGPoint(x: 77, y: 19))
+        pendulumBodyPath.addLine(to: CGPoint(x: 35, y: 19))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 32, y: 16), controlPoint1: CGPoint(x: 33.34, y: 19), controlPoint2: CGPoint(x: 32, y: 17.66))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 35, y: 13), controlPoint1: CGPoint(x: 32, y: 14.34), controlPoint2: CGPoint(x: 33.34, y: 13))
+        pendulumBodyPath.addLine(to: CGPoint(x: 77, y: 13))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 80, y: 16), controlPoint1: CGPoint(x: 78.66, y: 13), controlPoint2: CGPoint(x: 80, y: 14.34))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 77, y: 19), controlPoint1: CGPoint(x: 80, y: 17.66), controlPoint2: CGPoint(x: 78.66, y: 19))
+        pendulumBodyPath.close()
+        pendulumBodyPath.move(to: CGPoint(x: 16, y: 23))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 9, y: 16), controlPoint1: CGPoint(x: 12.13, y: 23), controlPoint2: CGPoint(x: 9, y: 19.87))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 16, y: 9), controlPoint1: CGPoint(x: 9, y: 12.13), controlPoint2: CGPoint(x: 12.13, y: 9))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 23, y: 16), controlPoint1: CGPoint(x: 19.87, y: 9), controlPoint2: CGPoint(x: 23, y: 12.13))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 16, y: 23), controlPoint1: CGPoint(x: 23, y: 19.87), controlPoint2: CGPoint(x: 19.87, y: 23))
+        pendulumBodyPath.close()
+        pendulumBodyPath.move(to: CGPoint(x: 148, y: 0))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 134.16, y: 8), controlPoint1: CGPoint(x: 142.08, y: 0), controlPoint2: CGPoint(x: 136.93, y: 3.22))
+        pendulumBodyPath.addLine(to: CGPoint(x: 29.84, y: 8))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 16, y: 0), controlPoint1: CGPoint(x: 27.07, y: 3.22), controlPoint2: CGPoint(x: 21.92, y: 0))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 0, y: 16), controlPoint1: CGPoint(x: 7.16, y: 0), controlPoint2: CGPoint(x: 0, y: 7.16))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 16, y: 32), controlPoint1: CGPoint(x: 0, y: 24.84), controlPoint2: CGPoint(x: 7.16, y: 32))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 29.84, y: 24), controlPoint1: CGPoint(x: 21.92, y: 32), controlPoint2: CGPoint(x: 27.07, y: 28.78))
+        pendulumBodyPath.addLine(to: CGPoint(x: 134.16, y: 24))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 148, y: 32), controlPoint1: CGPoint(x: 136.93, y: 28.78), controlPoint2: CGPoint(x: 142.08, y: 32))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 164, y: 16), controlPoint1: CGPoint(x: 156.84, y: 32), controlPoint2: CGPoint(x: 164, y: 24.84))
+        pendulumBodyPath.addCurve(to: CGPoint(x: 148, y: 0), controlPoint1: CGPoint(x: 164, y: 7.16), controlPoint2: CGPoint(x: 156.84, y: 0))
+        pendulumBodyPath.close()
         StyleKit.magnesium.setFill()
-        bezierPath.fill()
+        pendulumBodyPath.fill()
 
 
-        //// Group
+        //// Cross Mark
         //// Oval 4 Drawing
         let oval4Rect = CGRect(x: 139, y: 7, width: 18, height: 18)
         let oval4Path = UIBezierPath()
@@ -90,7 +90,7 @@ public class StyleKit : NSObject {
         oval4Path.addLine(to: CGPoint(x: oval4Rect.midX, y: oval4Rect.midY))
         oval4Path.close()
 
-        StyleKit.mercury.setFill()
+        UIColor.white.setFill()
         oval4Path.fill()
 
 
@@ -101,7 +101,7 @@ public class StyleKit : NSObject {
         oval5Path.addLine(to: CGPoint(x: oval5Rect.midX, y: oval5Rect.midY))
         oval5Path.close()
 
-        StyleKit.mercury.setFill()
+        UIColor.white.setFill()
         oval5Path.fill()
 
 
@@ -112,7 +112,7 @@ public class StyleKit : NSObject {
         oval6Path.addLine(to: CGPoint(x: oval6Rect.midX, y: oval6Rect.midY))
         oval6Path.close()
 
-        StyleKit.aluminum.setFill()
+        UIColor.black.setFill()
         oval6Path.fill()
 
 
@@ -123,7 +123,7 @@ public class StyleKit : NSObject {
         oval7Path.addLine(to: CGPoint(x: oval7Rect.midX, y: oval7Rect.midY))
         oval7Path.close()
 
-        StyleKit.aluminum.setFill()
+        UIColor.black.setFill()
         oval7Path.fill()
         
         context.restoreGState()
@@ -155,7 +155,7 @@ public class StyleKit : NSObject {
         oval4Path.addLine(to: CGPoint(x: oval4Rect.midX, y: oval4Rect.midY))
         oval4Path.close()
 
-        StyleKit.mercury.setFill()
+        UIColor.white.setFill()
         oval4Path.fill()
 
 
@@ -166,7 +166,7 @@ public class StyleKit : NSObject {
         oval5Path.addLine(to: CGPoint(x: oval5Rect.midX, y: oval5Rect.midY))
         oval5Path.close()
 
-        StyleKit.mercury.setFill()
+        UIColor.white.setFill()
         oval5Path.fill()
 
 
@@ -177,7 +177,7 @@ public class StyleKit : NSObject {
         oval6Path.addLine(to: CGPoint(x: oval6Rect.midX, y: oval6Rect.midY))
         oval6Path.close()
 
-        StyleKit.aluminum.setFill()
+        UIColor.black.setFill()
         oval6Path.fill()
 
 
@@ -188,7 +188,7 @@ public class StyleKit : NSObject {
         oval7Path.addLine(to: CGPoint(x: oval7Rect.midX, y: oval7Rect.midY))
         oval7Path.close()
 
-        StyleKit.aluminum.setFill()
+        UIColor.black.setFill()
         oval7Path.fill()
 
 
