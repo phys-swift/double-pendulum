@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5050820A203052C500F1DA49 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E4668203035B20045CB73 /* Simulator.swift */; };
 		506039F7202BBAA100FC0A72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506039F6202BBAA100FC0A72 /* AppDelegate.swift */; };
 		506039F9202BBAA100FC0A72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506039F8202BBAA100FC0A72 /* ViewController.swift */; };
 		506039FC202BBAA100FC0A72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506039FA202BBAA100FC0A72 /* Main.storyboard */; };
@@ -15,7 +16,18 @@
 		50603A0D202BBC7500FC0A72 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0C202BBC7500FC0A72 /* StyleKit.swift */; };
 		50603A0F202BBDB700FC0A72 /* PendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0E202BBDB700FC0A72 /* PendulumView.swift */; };
 		509E4669203035B20045CB73 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E4668203035B20045CB73 /* Simulator.swift */; };
+		50F4A37620304ECD009A7B3A /* Simulator Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F4A37520304ECD009A7B3A /* Simulator Tests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50F4A37820304ECD009A7B3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 506039EB202BBAA100FC0A72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506039F2202BBAA100FC0A72;
+			remoteInfo = "Double Pendulum";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		506039F3202BBAA100FC0A72 /* Double Pendulum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Double Pendulum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,10 +40,20 @@
 		50603A0C202BBC7500FC0A72 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		50603A0E202BBDB700FC0A72 /* PendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendulumView.swift; sourceTree = "<group>"; };
 		509E4668203035B20045CB73 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		50F4A37320304ECD009A7B3A /* Simulator Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simulator Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F4A37520304ECD009A7B3A /* Simulator Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulator Tests.swift"; sourceTree = "<group>"; };
+		50F4A37720304ECD009A7B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		506039F0202BBAA100FC0A72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F4A37020304ECD009A7B3A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +69,7 @@
 				506039FD202BBAA100FC0A72 /* Assets.xcassets */,
 				50603A0C202BBC7500FC0A72 /* StyleKit.swift */,
 				506039F5202BBAA100FC0A72 /* Double Pendulum */,
+				50F4A37420304ECD009A7B3A /* Simulator Tests */,
 				506039F4202BBAA100FC0A72 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				506039F3202BBAA100FC0A72 /* Double Pendulum.app */,
+				50F4A37320304ECD009A7B3A /* Simulator Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +95,15 @@
 				50603A02202BBAA100FC0A72 /* Info.plist */,
 			);
 			path = "Double Pendulum";
+			sourceTree = "<group>";
+		};
+		50F4A37420304ECD009A7B3A /* Simulator Tests */ = {
+			isa = PBXGroup;
+			children = (
+				50F4A37520304ECD009A7B3A /* Simulator Tests.swift */,
+				50F4A37720304ECD009A7B3A /* Info.plist */,
+			);
+			path = "Simulator Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +126,24 @@
 			productReference = 506039F3202BBAA100FC0A72 /* Double Pendulum.app */;
 			productType = "com.apple.product-type.application";
 		};
+		50F4A37220304ECD009A7B3A /* Simulator Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50F4A37C20304ECD009A7B3A /* Build configuration list for PBXNativeTarget "Simulator Tests" */;
+			buildPhases = (
+				50F4A36F20304ECD009A7B3A /* Sources */,
+				50F4A37020304ECD009A7B3A /* Frameworks */,
+				50F4A37120304ECD009A7B3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50F4A37920304ECD009A7B3A /* PBXTargetDependency */,
+			);
+			name = "Simulator Tests";
+			productName = "Simulator Tests";
+			productReference = 50F4A37320304ECD009A7B3A /* Simulator Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -106,6 +157,11 @@
 					506039F2202BBAA100FC0A72 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					50F4A37220304ECD009A7B3A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 506039F2202BBAA100FC0A72;
 					};
 				};
 			};
@@ -123,6 +179,7 @@
 			projectRoot = "";
 			targets = (
 				506039F2202BBAA100FC0A72 /* Double Pendulum */,
+				50F4A37220304ECD009A7B3A /* Simulator Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -135,6 +192,13 @@
 				50603A01202BBAA100FC0A72 /* LaunchScreen.storyboard in Resources */,
 				506039FE202BBAA100FC0A72 /* Assets.xcassets in Resources */,
 				506039FC202BBAA100FC0A72 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50F4A37120304ECD009A7B3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +217,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		50F4A36F20304ECD009A7B3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5050820A203052C500F1DA49 /* Simulator.swift in Sources */,
+				50F4A37620304ECD009A7B3A /* Simulator Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50F4A37920304ECD009A7B3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506039F2202BBAA100FC0A72 /* Double Pendulum */;
+			targetProxy = 50F4A37820304ECD009A7B3A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		506039FA202BBAA100FC0A72 /* Main.storyboard */ = {
@@ -312,6 +393,38 @@
 			};
 			name = Release;
 		};
+		50F4A37A20304ECD009A7B3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 28GCAU455A;
+				INFOPLIST_FILE = "Simulator Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.sfu.phys.simulator-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Double Pendulum.app/Double Pendulum";
+			};
+			name = Debug;
+		};
+		50F4A37B20304ECD009A7B3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 28GCAU455A;
+				INFOPLIST_FILE = "Simulator Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.sfu.phys.simulator-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Double Pendulum.app/Double Pendulum";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -329,6 +442,15 @@
 			buildConfigurations = (
 				50603A06202BBAA100FC0A72 /* Debug */,
 				50603A07202BBAA100FC0A72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50F4A37C20304ECD009A7B3A /* Build configuration list for PBXNativeTarget "Simulator Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50F4A37A20304ECD009A7B3A /* Debug */,
+				50F4A37B20304ECD009A7B3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
