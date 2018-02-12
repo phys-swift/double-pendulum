@@ -31,3 +31,41 @@ func gl8(state y: double4, step dt: Double, derivatives f: (double4) -> double4)
     // return the solution
     return y + (g*b)*dt
 }
+
+// physical model of the double pendulum
+struct DoublePendulum {
+    var state = double4(1,1,0,0)
+    var omega2 = 1.0
+    
+    func velocities(_ y: double4) -> double2 {
+        let gamma = cos(y[0]-y[1])
+        let kappa = (16.0/9.0) - gamma*gamma
+        let a = (2.0/3.0)*y[2] - gamma*y[3]
+        let b = (8.0/3.0)*y[3] - gamma*y[2]
+        
+        return double2(a,b)/kappa
+    }
+    
+    func derivatives(_ y: double4) -> double4 {
+        let v = velocities(y)
+        let a = -3.0 * omega2 * sin(y[0])
+        let b = -1.0 * omega2 * sin(y[1])
+        let w = v[0]*v[1] * sin(y[0]-y[1])
+        
+        return double4(v[0], v[1], a-w, b+w)
+    }
+    
+    func energy(_ y: double4) -> Double {
+        let v = velocities(y)
+        let a = -3.0 * omega2 * cos(y[0])
+        let b = -1.0 * omega2 * cos(y[1])
+        let w = v[0]*v[1] * cos(y[0]-y[1])
+        let k = (4.0*v[0]*v[0] + v[1]*v[1])/3.0
+        
+        return k + a + b + w
+    }
+    
+    mutating func step(_ dt: Double) {
+        state = gl8(state: state, step: dt, derivatives: derivatives)
+    }
+}

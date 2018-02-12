@@ -47,9 +47,28 @@ class SimulatorTests: XCTestCase {
         XCTAssertEqual(p,  0.0, accuracy: delta)
     }
     
+    func testDoublePendulum() {
+        var pendulum = DoublePendulum()
+        let dt = 0.01/sqrt(pendulum.omega2)
+        let E0 = pendulum.energy(pendulum.state)
+        
+        for _ in 0...10240 { pendulum.step(dt) }
+        let dE = pendulum.energy(pendulum.state) - E0
+        
+        XCTAssertEqual(dE, 0.0, accuracy: epsilon)
+    }
+    
     func testGL8Performance() {
-        let steps = self.steps, dt = 0.01; var y = double4(1, 0, 0, 0)
+        var y = double4(1, 0, 0, 0)
+        let steps = self.steps, dt = 0.01
         
         self.measure { for _ in 0...steps { y = gl8(state: y, step: dt) { y in double4(y[1], -y[0]*y[0]*y[0], 0, 0) } } }
+    }
+    
+    func testSimulatorPerformance() {
+        var pendulum = DoublePendulum()
+        let steps = self.steps/10, dt = 0.01
+        
+        self.measure { for _ in 0...steps { pendulum.step(dt) } }
     }
 }
