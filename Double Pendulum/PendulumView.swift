@@ -9,8 +9,8 @@
 import UIKit
 
 class PendulumView: UIView {
-    @objc dynamic var phi: Float = 0.0 { didSet { if phi != oldValue { setNeedsDisplay() } } }
-    @objc dynamic var psi: Float = 0.0 { didSet { if psi != oldValue { setNeedsDisplay() } } }
+    // physical model
+    var pendulum = DoublePendulum()
     
     // link to display refresh rate timer
     var link: CADisplayLink? = nil { didSet {
@@ -27,14 +27,18 @@ class PendulumView: UIView {
         super.awakeFromNib()
         
         let link = CADisplayLink(target: self, selector: #selector(step))
-        link.preferredFramesPerSecond = 30; self.link = link
+        link.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        self.link = link
     }
     
     // draw double pendulum
     override func draw(_ rect: CGRect) {
-        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(phi), psi: CGFloat(psi))
+        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon))
     }
     
     // pendulum state update
-    @objc func step() { phi += 0.5; psi += 1.3 }
+    @objc func step(link: CADisplayLink) {
+        let dt = (link.targetTimestamp - link.timestamp)/32
+        for _ in 0..<32 { pendulum.step(dt) }; setNeedsDisplay()
+    }
 }

@@ -34,9 +34,42 @@ func gl8(state y: double4, step dt: Double, derivatives f: (double4) -> double4)
 
 // physical model of the double pendulum
 struct DoublePendulum {
-    var state = double4(1,1,0,0)
-    var omega2 = 1.0
+    // MARK: dynamical variables
+    var state = double4(2,1,0,0)
+    var omega2 = 2.0 * Double.pi
+    var theta0 = 0.0
     
+    // MARK: interface to controls
+    var phi: Double {
+        get { return (180.0/Double.pi) * state[0] }
+        set {
+            let delta = (Double.pi/180.0) * (newValue - phi)
+            state[0] += delta; state[1] += delta
+            state[2] = 0.0; state[3] = 0.0
+        }
+    }
+    
+    var psi: Double {
+        get { return (180.0/Double.pi) * (state[1] - state[0]) }
+        set {
+            let delta = (Double.pi/180.0) * (newValue - psi)
+            let v = velocities(state); state[1] += delta
+            
+            let gamma = cos(state[0]-state[1])
+            state[2] = ((8.0/3.0) + gamma) * v[0]
+            state[3] = ((2.0/3.0) + gamma) * v[0]
+        }
+    }
+    
+    var upsilon: Double {
+        get { return (180.0/Double.pi) * theta0 }
+        set {
+            let delta = (Double.pi/180.0) * (newValue - upsilon)
+            theta0 += delta; state[0] -= delta; state[1] -= delta
+        }
+    }
+    
+    // MARK: equations of motion
     func velocities(_ y: double4) -> double2 {
         let gamma = cos(y[0]-y[1])
         let kappa = (16.0/9.0) - gamma*gamma
@@ -65,6 +98,10 @@ struct DoublePendulum {
         return k + a + b + w
     }
     
+    // MARK: timescale to be resolved
+    var timescale: Double { return (2.0*Double.pi)/sqrt(13.0*omega2 + 3.0*energy(state)) }
+    
+    // MARK: pendulum evolution
     mutating func step(_ dt: Double) {
         state = gl8(state: state, step: dt, derivatives: derivatives)
     }
