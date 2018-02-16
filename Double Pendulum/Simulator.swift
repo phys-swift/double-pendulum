@@ -69,6 +69,15 @@ struct DoublePendulum {
         }
     }
     
+    // MARK: cartesian coordinates of the end
+    var cartesian: double4 {
+        let v = velocities(state)
+        let s1 = sin(state[0]+theta0), s2 = sin(state[1]+theta0)
+        let c1 = cos(state[0]+theta0), c2 = cos(state[1]+theta0)
+        
+        return double4(s1+s2,-c1-c2,v[0]*c1+v[1]*c2,v[0]*s1+v[1]*s2)
+    }
+    
     // MARK: equations of motion
     func velocities(_ y: double4) -> double2 {
         let gamma = cos(y[0]-y[1])
@@ -105,4 +114,45 @@ struct DoublePendulum {
     mutating func step(_ dt: Double) {
         state = gl8(state: state, step: dt, derivatives: derivatives)
     }
+}
+
+// pendulum trajectory is stored in a ring buffer
+struct History {
+    // data types used
+    typealias Time = Double
+    typealias Data = double4
+    typealias Element = (time: Time, data: Data)
+    
+    // buffer variables
+    var time: [Time]
+    var data: [Data]
+    let size: Int
+    let step: Int
+    var head = 0
+    var tail = 0
+    
+    var count: Int { return (head-tail+step-1)/step }
+    var full: Bool { return count >= size }
+    
+    // default initializer
+    init(size count: Int, step every: Int = 1) {
+        size = count; step = every
+        time = [Time](repeating: 0, count: count)
+        data = [Data](repeating: Data(0), count: count)
+    }
+    
+    // access to buffer contents, tail to head
+    subscript (index: Int) -> Element {
+        get { let i = (tail/step + index) % size; return (time[i], data[i]) }
+        set { let i = (tail/step + index) % size; time[i] = newValue.time; data[i] = newValue.data }
+    }
+    
+    // log new data point, dropping the tail if necessary
+    mutating func add(time t: Time, data x: Data) {
+        let i = (head/step) % size; time[i] = t; data[i] = x; if full { tail += 1 }; head += 1
+    }
+    
+    // drop a point or reset the buffer entirely
+    mutating func drop() { if (tail < head) { tail += 1 } }
+    mutating func reset() { tail = head }
 }
