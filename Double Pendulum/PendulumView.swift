@@ -9,11 +9,22 @@
 import UIKit
 
 class PendulumView: UIView {
-    // physical model
+    // MARK: physical model
     var pendulum = DoublePendulum()
     var trace = History(size: 50, step: UIScreen.main.maximumFramesPerSecond/10)
     
-    // interface to controller
+    // MARK: simulation states
+    enum State: Int { case running, dragging, paused }
+    
+    var simulation = State.running { didSet {
+        guard simulation != oldValue else { return }
+        link?.isPaused = (simulation == .paused)
+    } }
+    
+    // MARK: gesture recognizers
+    var press = UILongPressGestureRecognizer()
+    
+    // MARK: interface to view controller
     @objc dynamic var displayTrace = true
     
     @objc dynamic var phi: Float {
@@ -26,32 +37,36 @@ class PendulumView: UIView {
         set { pendulum.psi = Double(newValue); trace.reset() }
     }
     
-    // link to display refresh rate timer
+    // MARK: link to display refresh rate timer
     var link: CADisplayLink? = nil { didSet {
         guard link != oldValue else { return }
         if let link = oldValue { link.invalidate() }
         if let link = link { link.add(to: .current, forMode: .defaultRunLoopMode) }
     } }
     
-    // clean up
+    // MARK: clean up
     deinit { link = nil }
     
-    // runtime initialization
+    // MARK: runtime initialization
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // activate display link
         let link = CADisplayLink(target: self, selector: #selector(step))
         link.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
         self.link = link
+        
+        // ...
+        press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
     }
     
-    // draw double pendulum
+    // MARK: draw double pendulum
     override func draw(_ rect: CGRect) {
         StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon))
         if displayTrace { drawTrajectory(frame: rect, trace: trace) }
     }
     
-    // draw pendulum trajectory
+    // MARK: draw pendulum trajectory
     func drawTrajectory(frame rect: CGRect, trace: History, color: UIColor = UIColor.red) {
         guard trace.count > 1, let context = UIGraphicsGetCurrentContext() else { return }
         
@@ -87,10 +102,36 @@ class PendulumView: UIView {
         context.restoreGState()
     }
     
-    // pendulum state update
+    // MARK: pendulum state update
     @objc func step(link: CADisplayLink) {
         let dt = (link.targetTimestamp - link.timestamp)/32
-        for _ in 0..<32 { pendulum.step(dt) }; setNeedsDisplay()
-        trace.add(time: link.targetTimestamp, data: pendulum.cartesian)
+        
+        switch simulation {
+        case .running:
+            for _ in 0..<32 { pendulum.step(dt) }
+        case .dragging:
+            for _ in 0..<320 { pendulum.drag(dt/10) }
+        default: break
+        }
+        
+        trace.add(time: pendulum.time, data: pendulum.cartesian)
+        setNeedsDisplay()
+    }
+    
+    // MARK: drag pendulum by the end
+    @IBAction func drag(_ gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            simulation = .dragging
+        case .changed:
+            let location = gesture.location(in: self)
+            let scale = (4*640/528.0)/min(bounds.width, bounds.height)
+            let x = Double((location.x - (bounds.minX + bounds.maxX)/2) * scale)
+            let y = Double((location.y - (bounds.minY + bounds.maxY)/2) * scale)
+            pendulum.target[0] =  cos(pendulum.theta0) * x - sin(pendulum.theta0) * y
+            pendulum.target[1] = -sin(pendulum.theta0) * x - cos(pendulum.theta0) * y
+        default:
+            simulation = .running
+        }
     }
 }
