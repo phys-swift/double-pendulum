@@ -37,6 +37,7 @@ struct DoublePendulum {
     // MARK: dynamical variables
     var state = double4(2,1,0,0)
     var omega2 = 2.0 * Double.pi
+    var target = double2(0)
     var theta0 = 0.0
     
     // MARK: interface to controls
@@ -113,6 +114,21 @@ struct DoublePendulum {
     // MARK: pendulum evolution
     mutating func step(_ dt: Double) {
         state = gl8(state: state, step: dt, derivatives: derivatives)
+    }
+    
+    // MARK: dragging motion
+    func dragging(_ y: double4) -> double4 {
+        let v = velocities(y)
+        let a = (target[0]*cos(y[0]) + target[1]*sin(y[0]) - 1.0*y[2]) * omega2
+        let b = (target[0]*cos(y[1]) + target[1]*sin(y[1]) - 2.0*y[3]) * omega2
+        let w = (v[0]*v[1] - omega2) * sin(y[0]-y[1])
+        
+        return double4(v[0], v[1], a-w, b+w)
+    }
+    
+    // MARK: drag the pendulum
+    mutating func drag(_ dt: Double) {
+        state = gl8(state: state, step: dt, derivatives: dragging)
     }
 }
 
