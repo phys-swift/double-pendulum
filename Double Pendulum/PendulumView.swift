@@ -22,6 +22,7 @@ class PendulumView: UIView {
     } }
     
     // MARK: gesture recognizers
+    var pause = UITapGestureRecognizer()
     var press = UILongPressGestureRecognizer()
     
     // MARK: interface to view controller
@@ -57,6 +58,7 @@ class PendulumView: UIView {
         self.link = link
         
         // ...
+        pause.addTarget(self, action: #selector(stop)); addGestureRecognizer(pause)
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
     }
     
@@ -116,6 +118,18 @@ class PendulumView: UIView {
         
         trace.add(time: pendulum.time, data: pendulum.cartesian)
         setNeedsDisplay()
+    }
+    
+    // MARK: pause simulation
+    @IBAction func stop(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        
+        switch simulation {
+        case .paused:
+            simulation = .running
+        default:
+            simulation = .paused
+        }
     }
     
     // MARK: drag pendulum by the end
