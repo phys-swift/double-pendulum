@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PendulumView: UIView {
+@IBDesignable class PendulumView: UIView {
     // MARK: physical model
     var pendulum = DoublePendulum()
     var trace = History(size: 50, step: UIScreen.main.maximumFramesPerSecond/10)
