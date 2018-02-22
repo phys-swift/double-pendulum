@@ -125,7 +125,7 @@ struct DoublePendulum {
     
     // MARK: dragging motion
     func dragging(_ y: double4) -> double4 {
-        let v = velocities(y), omega2 = 300.0 * self.omega2, gamma = 3.0 * sqrt(omega2)
+        let v = velocities(y), omega2 = 1600.0, gamma = 3.0 * sqrt(omega2)
         let a = (target[0]*cos(y[0]) + target[1]*sin(y[0])) * omega2 - (v[0] + v[1]*cos(y[0]-y[1])) * gamma
         let b = (target[0]*cos(y[1]) + target[1]*sin(y[1])) * omega2 - (v[1] + v[0]*cos(y[0]-y[1])) * gamma
         let w = (v[0]*v[1] - omega2) * sin(y[0]-y[1])
