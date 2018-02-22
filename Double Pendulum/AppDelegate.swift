@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreMotion
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    static let motion = CMMotionManager()
 
     var window: UIWindow?
 

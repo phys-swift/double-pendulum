@@ -38,6 +38,15 @@ class PendulumView: UIView {
         set { pendulum.psi = Double(newValue); trace.reset() }
     }
     
+    // MARK: accelerometer access
+    @objc dynamic var gravity = false { didSet {
+        guard gravity != oldValue else { return }
+        guard AppDelegate.motion.isDeviceMotionAvailable else { gravity = false; return }
+        
+        if gravity { AppDelegate.motion.startDeviceMotionUpdates() }
+        else { AppDelegate.motion.stopDeviceMotionUpdates() }
+    } }
+    
     // MARK: link to display refresh rate timer
     var link: CADisplayLink? = nil { didSet {
         guard link != oldValue else { return }
@@ -46,7 +55,7 @@ class PendulumView: UIView {
     } }
     
     // MARK: clean up
-    deinit { link = nil }
+    deinit { gravity = false; link = nil }
     
     // MARK: runtime initialization
     override func awakeFromNib() {
@@ -64,7 +73,7 @@ class PendulumView: UIView {
     
     // MARK: draw double pendulum
     override func draw(_ rect: CGRect) {
-        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon))
+        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0))
         if displayTrace { drawTrajectory(frame: rect, trace: trace) }
     }
     
@@ -104,9 +113,29 @@ class PendulumView: UIView {
         context.restoreGState()
     }
     
+    // MARK: translate fixed vector to current screen coordinates
+    func orient(_ x: Double, _ y: Double) -> (x: Double, y: Double) {
+        let screen = window?.screen ?? UIScreen.main
+        let origin = screen.coordinateSpace.convert(CGPoint(x: 0, y: 0), from: screen.fixedCoordinateSpace)
+        let vector = screen.coordinateSpace.convert(CGPoint(x: x, y: y), from: screen.fixedCoordinateSpace)
+        
+        return (Double(vector.x-origin.x), Double(vector.y-origin.y))
+    }
+    
     // MARK: pendulum state update
     @objc func step(link: CADisplayLink) {
         let dt = (link.targetTimestamp - link.timestamp)/32
+        
+        if gravity, let g = AppDelegate.motion.deviceMotion?.gravity {
+            let (x,y) = orient(g.x, -g.y), g2 = x*x + y*y
+            let delta = g2 * (atan2(x,y) - pendulum.theta0)
+            
+            pendulum.theta0 += delta
+            pendulum.state[0] -= delta
+            pendulum.state[1] -= delta
+            
+            pendulum.g = sqrt(g2)
+        }
         
         switch simulation {
         case .running:

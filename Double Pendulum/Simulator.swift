@@ -72,6 +72,11 @@ struct DoublePendulum {
         }
     }
     
+    var g: Double {
+        get { return omega2/6.0 }
+        set { omega2 = 6.0*newValue }
+    }
+    
     // MARK: cartesian coordinates of the end
     var cartesian: double4 {
         let v = velocities(state)
