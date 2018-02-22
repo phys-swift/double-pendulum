@@ -24,6 +24,7 @@ class PendulumView: UIView {
     // MARK: gesture recognizers
     var pause = UITapGestureRecognizer()
     var press = UILongPressGestureRecognizer()
+    var swipe = [UISwipeGestureRecognizer]()
     
     // MARK: interface to view controller
     @objc dynamic var displayTrace = true
@@ -66,9 +67,17 @@ class PendulumView: UIView {
         link.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
         self.link = link
         
-        // ...
+        // add press recognizers
         pause.addTarget(self, action: #selector(stop)); addGestureRecognizer(pause)
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
+        
+        // add swipe recognizers
+        let directions: [UISwipeGestureRecognizerDirection] = [.left, .right, .up, .down]
+        for direction in directions {
+            let swipe = UISwipeGestureRecognizer()
+            swipe.direction = direction; self.swipe.append(swipe)
+            swipe.addTarget(self, action: #selector(kick)); addGestureRecognizer(swipe)
+        }
     }
     
     // MARK: draw double pendulum
@@ -122,6 +131,16 @@ class PendulumView: UIView {
         return (Double(vector.x-origin.x), Double(vector.y-origin.y))
     }
     
+    // MARK: gesture location in pendulum coordinates
+    func locate(_ gesture: UIGestureRecognizer) -> (x: Double, y: Double) {
+        let location = gesture.location(in: self)
+        let scale = (4*640/528.0)/min(bounds.width, bounds.height)
+        let x = Double((location.x - center.x) * scale)
+        let y = Double((location.y - center.y) * scale)
+        
+        return (x,-y)
+    }
+    
     // MARK: pendulum state update
     @objc func step(link: CADisplayLink) {
         let dt = (link.targetTimestamp - link.timestamp)/32
@@ -167,14 +186,26 @@ class PendulumView: UIView {
         case .began:
             simulation = .dragging
         case .changed:
-            let location = gesture.location(in: self)
-            let scale = (4*640/528.0)/min(bounds.width, bounds.height)
-            let x = Double((location.x - (bounds.minX + bounds.maxX)/2) * scale)
-            let y = Double((location.y - (bounds.minY + bounds.maxY)/2) * scale)
-            pendulum.target[0] =  cos(pendulum.theta0) * x - sin(pendulum.theta0) * y
-            pendulum.target[1] = -sin(pendulum.theta0) * x - cos(pendulum.theta0) * y
+            let (x,y) = locate(gesture)
+            pendulum.target[0] =  cos(pendulum.theta0) * x + sin(pendulum.theta0) * y
+            pendulum.target[1] = -sin(pendulum.theta0) * x + cos(pendulum.theta0) * y
         default:
             simulation = .running
+        }
+    }
+    
+    // MARK: kick pendulum
+    @IBAction func kick(_ gesture: UISwipeGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        
+        let (x,y) = locate(gesture)
+        
+        switch (gesture.direction, x+2, y+2) {
+        case (.right,_,0...1), (.left,_,3...4), (.down,0...1,_), (.up,3...4,_): pendulum.kick(0,3)
+        case (.right,_,1...2), (.left,_,2...3), (.down,1...2,_), (.up,2...3,_): pendulum.kick(3,0)
+        case (.left,_,0...1), (.right,_,3...4), (.up,0...1,_), (.down,3...4,_): pendulum.kick(0,-3)
+        case (.left,_,1...2), (.right,_,2...3), (.up,1...2,_), (.down,2...3,_): pendulum.kick(-3,0)
+        default: break
         }
     }
 }

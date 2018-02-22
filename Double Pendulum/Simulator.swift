@@ -137,6 +137,13 @@ struct DoublePendulum {
     mutating func drag(_ dt: Double) {
         state = gl8(state: state, step: dt, derivatives: dragging); time += dt
     }
+    
+    // MARK: kick the pendulum
+    mutating func kick(_ v1: Double, _ v2: Double) {
+        let gamma = cos(state[0]-state[1])
+        state[2] += (8.0/3.0)*v1 + gamma*v2
+        state[3] += (2.0/3.0)*v2 + gamma*v1
+    }
 }
 
 // pendulum trajectory is stored in a ring buffer
