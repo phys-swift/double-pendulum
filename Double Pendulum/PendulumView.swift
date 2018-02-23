@@ -14,7 +14,7 @@ import UIKit
     var trace = History(size: 50, step: UIScreen.main.maximumFramesPerSecond/10)
     
     // MARK: simulation states
-    enum State: Int { case running, dragging, paused }
+    enum State: Int { case running, braking, dragging, paused }
     
     var simulation = State.running { didSet {
         guard simulation != oldValue else { return }
@@ -83,7 +83,7 @@ import UIKit
     
     // MARK: draw double pendulum
     override func draw(_ rect: CGRect) {
-        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0))
+        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0), braking: simulation == .braking)
         if displayTrace { drawTrajectory(frame: rect, trace: trace) }
     }
     
@@ -146,6 +146,7 @@ import UIKit
     @objc func step(link: CADisplayLink) {
         let dt = (link.targetTimestamp - link.timestamp)/32
         
+        // update gravity vector
         if gravity, let g = AppDelegate.motion.deviceMotion?.gravity {
             let (x,y) = orient(g.x, -g.y), g2 = x*x + y*y
             let delta = g2 * (atan2(x,y) - pendulum.theta)
@@ -157,14 +158,23 @@ import UIKit
             pendulum.g = sqrt(g2)
         }
         
+        // update automatic braking
+        let v = pendulum.speed, E = pendulum.energy.total
+        if (simulation == .running && v > 60.0) { UISelectionFeedbackGenerator().selectionChanged(); simulation = .braking }
+        if (simulation == .braking && E <  4.0) { UISelectionFeedbackGenerator().selectionChanged(); simulation = .running }
+        
+        // advance the simulation
         switch simulation {
         case .running:
             for _ in 0..<32 { pendulum.step(dt) }
+        case .braking:
+            for _ in 0..<32 { pendulum.slow(dt) }
         case .dragging:
             for _ in 0..<320 { pendulum.drag(dt/10) }
         default: break
         }
         
+        // log the new position
         trace.add(time: pendulum.time, data: pendulum.cartesian)
         setNeedsDisplay()
     }
