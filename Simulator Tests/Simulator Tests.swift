@@ -50,10 +50,10 @@ class SimulatorTests: XCTestCase {
     func testDoublePendulum() {
         var pendulum = DoublePendulum()
         let dt = 0.01/sqrt(pendulum.omega2)
-        let E0 = pendulum.energy(pendulum.state)
+        let E0 = pendulum.energy.total
         
         for _ in 0...10240 { pendulum.step(dt) }
-        let dE = pendulum.energy(pendulum.state) - E0
+        let dE = pendulum.energy.total - E0
         
         XCTAssertEqual(dE, 0.0, accuracy: epsilon)
     }

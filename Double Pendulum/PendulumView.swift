@@ -148,9 +148,9 @@ import UIKit
         
         if gravity, let g = AppDelegate.motion.deviceMotion?.gravity {
             let (x,y) = orient(g.x, -g.y), g2 = x*x + y*y
-            let delta = g2 * (atan2(x,y) - pendulum.theta0)
+            let delta = g2 * (atan2(x,y) - pendulum.theta)
             
-            pendulum.theta0 += delta
+            pendulum.theta += delta
             pendulum.state[0] -= delta
             pendulum.state[1] -= delta
             
@@ -193,8 +193,8 @@ import UIKit
             simulation = .dragging; fallthrough
         case .changed:
             let (x,y) = locate(gesture)
-            pendulum.target[0] =  cos(pendulum.theta0) * x + sin(pendulum.theta0) * y
-            pendulum.target[1] = -sin(pendulum.theta0) * x + cos(pendulum.theta0) * y
+            pendulum.target[0] =  cos(pendulum.theta) * x + sin(pendulum.theta) * y
+            pendulum.target[1] = -sin(pendulum.theta) * x + cos(pendulum.theta) * y
         default:
             simulation = .running
         }
