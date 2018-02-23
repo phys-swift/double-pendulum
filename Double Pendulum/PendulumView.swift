@@ -68,6 +68,7 @@ import UIKit
         self.link = link
         
         // add press recognizers
+        press.minimumPressDuration = 0.2; press.allowableMovement = 20
         pause.addTarget(self, action: #selector(stop)); addGestureRecognizer(pause)
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
         
@@ -172,11 +173,15 @@ import UIKit
     @IBAction func stop(_ gesture: UITapGestureRecognizer) {
         guard gesture.state == .ended else { return }
         
+        let (x,y) = locate(gesture)
+        guard x*x + y*y < 5 else { return }
+        
         switch simulation {
+        case .running:
+            simulation = .paused
         case .paused:
             simulation = .running
-        default:
-            simulation = .paused
+        default: break
         }
     }
     
@@ -184,7 +189,8 @@ import UIKit
     @IBAction func drag(_ gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            simulation = .dragging
+            UISelectionFeedbackGenerator().selectionChanged()
+            simulation = .dragging; fallthrough
         case .changed:
             let (x,y) = locate(gesture)
             pendulum.target[0] =  cos(pendulum.theta0) * x + sin(pendulum.theta0) * y
