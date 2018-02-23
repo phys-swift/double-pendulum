@@ -19,10 +19,15 @@ import UIKit
     var simulation = State.running { didSet {
         guard simulation != oldValue else { return }
         link?.isPaused = (simulation == .paused)
+        
+        if (simulation == .braking || simulation == .dragging) {
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
     } }
     
     // MARK: gesture recognizers
     var pause = UITapGestureRecognizer()
+    var brake = UITapGestureRecognizer()
     var press = UILongPressGestureRecognizer()
     var swipe = [UISwipeGestureRecognizer]()
     
@@ -69,7 +74,9 @@ import UIKit
         
         // add press recognizers
         press.minimumPressDuration = 0.2; press.allowableMovement = 20
-        pause.addTarget(self, action: #selector(stop)); addGestureRecognizer(pause)
+        pause.numberOfTouchesRequired = 1; brake.numberOfTouchesRequired = 2
+        pause.addTarget(self, action: #selector(play)); addGestureRecognizer(pause)
+        brake.addTarget(self, action: #selector(stop)); addGestureRecognizer(brake)
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
         
         // add swipe recognizers
@@ -159,9 +166,8 @@ import UIKit
         }
         
         // update automatic braking
-        let v = pendulum.speed, E = pendulum.energy.total
-        if (simulation == .running && v > 60.0) { UISelectionFeedbackGenerator().selectionChanged(); simulation = .braking }
-        if (simulation == .braking && E <  4.0) { UISelectionFeedbackGenerator().selectionChanged(); simulation = .running }
+        if (simulation == .running && pendulum.speed > 60.0) { simulation = .braking }
+        if (simulation == .braking && pendulum.energy.total < 4.0) { simulation = .running }
         
         // advance the simulation
         switch simulation {
@@ -180,7 +186,7 @@ import UIKit
     }
     
     // MARK: pause simulation
-    @IBAction func stop(_ gesture: UITapGestureRecognizer) {
+    @IBAction func play(_ gesture: UITapGestureRecognizer) {
         guard gesture.state == .ended else { return }
         
         let (x,y) = locate(gesture)
@@ -195,11 +201,27 @@ import UIKit
         }
     }
     
+    // MARK: stop pendulum
+    @IBAction func stop(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        
+        let (x,y) = locate(gesture)
+        guard x*x + y*y < 5 else { return }
+        
+        switch sqrt(pendulum.energy.kinetic) {
+        case 0...5: UIImpactFeedbackGenerator(style: .light ).impactOccurred()
+        case 5...9: UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        case 9...:  UIImpactFeedbackGenerator(style: .heavy ).impactOccurred()
+        default: break
+        }
+        
+        pendulum.stop()
+    }
+    
     // MARK: drag pendulum by the end
     @IBAction func drag(_ gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            UISelectionFeedbackGenerator().selectionChanged()
             simulation = .dragging; fallthrough
         case .changed:
             let (x,y) = locate(gesture)
