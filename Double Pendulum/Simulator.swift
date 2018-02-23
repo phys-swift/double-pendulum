@@ -139,6 +139,9 @@ struct DoublePendulum {
         return (k+w, a+b, k+a+b+w)
     }
     
+    // MARK: perceptual speed of motion
+    var speed: Double { let v = velocities(state); return sqrt(2.0*v[0]*(v[0]+v[1]) + v[1]*v[1]) }
+    
     // MARK: timescale to be resolved
     var timescale: Double { return (2.0*Double.pi)/sqrt(13.0*omega2 + 3.0*energy.total) }
     
