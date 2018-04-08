@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-BG-M8F" customClass="PendulumView" customModule="Double_Pendulum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-BG-M8F" customClass="PendulumView" customModule="Double_Pendulum" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJH-Fu-cBx">
@@ -33,6 +32,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xY1-BG-M8F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FlI-JO-4Yl"/>
+                            <constraint firstItem="xY1-BG-M8F" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ZpA-bl-PmA"/>
+                            <constraint firstItem="xY1-BG-M8F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fpH-OR-N9b"/>
+                            <constraint firstItem="xY1-BG-M8F" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uIh-ZH-cc7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -48,9 +53,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gaB-I2-E6U">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gaB-I2-E6U">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -66,6 +70,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gaB-I2-E6U" firstAttribute="top" secondItem="zco-lv-TuS" secondAttribute="top" id="7Tj-7D-D7c"/>
+                            <constraint firstItem="gaB-I2-E6U" firstAttribute="bottom" secondItem="zco-lv-TuS" secondAttribute="bottom" id="Ttd-sW-jIn"/>
+                            <constraint firstItem="gaB-I2-E6U" firstAttribute="leading" secondItem="zco-lv-TuS" secondAttribute="leading" id="k3g-tI-H8n"/>
+                            <constraint firstItem="gaB-I2-E6U" firstAttribute="trailing" secondItem="zco-lv-TuS" secondAttribute="trailing" id="nmp-8J-rd7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="zco-lv-TuS"/>
                     </view>
                 </viewController>
