@@ -143,8 +143,8 @@ import UIKit
     func locate(_ gesture: UIGestureRecognizer) -> (x: Double, y: Double) {
         let location = gesture.location(in: self)
         let scale = (4*640/528.0)/min(bounds.width, bounds.height)
-        let x = Double((location.x - center.x) * scale)
-        let y = Double((location.y - center.y) * scale)
+        let x = Double((location.x - bounds.midX) * scale)
+        let y = Double((location.y - bounds.midY) * scale)
         
         return (x,-y)
     }
