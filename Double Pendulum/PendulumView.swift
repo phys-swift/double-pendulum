@@ -74,7 +74,7 @@ import UIKit
         
         // add press recognizers
         press.minimumPressDuration = 0.2; press.allowableMovement = 20
-        pause.numberOfTouchesRequired = 1; brake.numberOfTouchesRequired = 2
+        pause.numberOfTouchesRequired = 2; brake.numberOfTouchesRequired = 1
         pause.addTarget(self, action: #selector(play)); addGestureRecognizer(pause)
         brake.addTarget(self, action: #selector(stop)); addGestureRecognizer(brake)
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
