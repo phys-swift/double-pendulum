@@ -16,7 +16,14 @@ class ViewController: UIViewController {
 
 // about page view controller
 class AboutController: UIViewController {
-    override func viewDidLoad() { super.viewDidLoad() }
+    @IBOutlet weak var about: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        about.attributedText = Double_Pendulum.about
+        about.adjustsFontForContentSizeCategory = true
+    }
+    
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true, completion: nil) }
