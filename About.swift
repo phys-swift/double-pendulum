@@ -15,16 +15,16 @@ let attachment = Character(Unicode.Scalar(NSAttachmentCharacter)!)
 let blurb: String = """
 \(attachment)
 
-Double pendulum is a simple mechanical system displaying chaos. The motion of the pendulum arms can be complex and unpredictable, as even minute changes can lead to very different trajectories. This app accurately simulates physics of a frictionless double pendulum, so you can explore and enjoy complexity and beaty of mechanical chaos.
+The double pendulum is a simple mechanical system that displays chaos. The motion of the pendulum arms can be complex and unpredictable, with even minute changes leading to very different trajectories. This app accurately simulates the physics of a frictionless double pendulum, so you can explore and enjoy the complexity and beauty of mechanical chaos.
 
 Interacting with the pendulum:
-Short-tap with one finger to stop the pendulum, long-press to grab it by the end and drag around. Swipe within inner circle to give the first arm a kick, or within outer circle to give the second arm a kick in the direction of the swipe. Tap with two fingers to pause or resume the simulation. If motion of the pendulum gets too fast, emergency brakes will engage. You can control simulation using real gravity and your device orientation if you enable it in Settings.
+Short-tap with one finger to stop the pendulum; long-press to grab it by the end and drag it around. Swipe within the inner circle to give the first arm a kick, or within the outer circle to give the second arm a kick in the direction of the swipe. Tap with two fingers to pause or resume the simulation. If the motion of the pendulum gets too fast, emergency brakes will engage. You can control the simulation using real gravity and your device orientation if you enable it in Settings.
 
 What exactly is being computed here?
-Equations of motion of a double pendulum are derived here. They are integrated numerically using eighth-order Gauss-Legendre method, which is highly accurate and preserves the symplectic form for Hamiltonian systems. Dragging the pendulum by the end actually solves equations of motion of a double pendulum with a spring attached between its end and your finger. Viscous friction used to damp the pendulum motion while dragging or braking is modelled by Rayleigh dissipation.
+The equations of motion for a double pendulum are derived here. They are integrated numerically using an eighth-order Gauss-Legendre method, which is highly accurate and preserves the symplectic form for Hamiltonian systems. Dragging the pendulum by the end actually solves the equations of motion of a double pendulum with a spring attached between its end and your finger. Viscous friction which is used to damp the pendulum motion while dragging and braking is modelled by Rayleigh dissipation.
 
 Want to learn more?
-This app is brought to you by Cosmology Group at the Physics Department of the Simon Fraser University, where we teach classical and modern physics courses, as well as how to do computer simulations and write apps such as this one. Come to the Dark Side, we have cookies!
+This app is brought to you by the Cosmology Group at the Physics Department of the Simon Fraser University, where we teach classical and modern physics courses, as well as how to do computer simulations and write apps such as this one. Come to the Dark Side, we have cookies!
 
 Have Fun!
 """
