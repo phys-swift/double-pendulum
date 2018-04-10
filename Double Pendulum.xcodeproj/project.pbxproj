@@ -16,6 +16,7 @@
 		50603A0D202BBC7500FC0A72 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0C202BBC7500FC0A72 /* StyleKit.swift */; };
 		50603A0F202BBDB700FC0A72 /* PendulumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50603A0E202BBDB700FC0A72 /* PendulumView.swift */; };
 		509E4669203035B20045CB73 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509E4668203035B20045CB73 /* Simulator.swift */; };
+		50D35C09207C796300DEAEF6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50D35C08207C796300DEAEF6 /* Settings.bundle */; };
 		50E15E18207B059D009EFA17 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E15E17207B059D009EFA17 /* About.swift */; };
 		50F4A37620304ECD009A7B3A /* Simulator Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F4A37520304ECD009A7B3A /* Simulator Tests.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		50603A0C202BBC7500FC0A72 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		50603A0E202BBDB700FC0A72 /* PendulumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendulumView.swift; sourceTree = "<group>"; };
 		509E4668203035B20045CB73 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		50D35C08207C796300DEAEF6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		50E15E17207B059D009EFA17 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		50F4A37320304ECD009A7B3A /* Simulator Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simulator Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F4A37520304ECD009A7B3A /* Simulator Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulator Tests.swift"; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				506039FD202BBAA100FC0A72 /* Assets.xcassets */,
+				50D35C08207C796300DEAEF6 /* Settings.bundle */,
 				50E15E17207B059D009EFA17 /* About.swift */,
 				50603A0C202BBC7500FC0A72 /* StyleKit.swift */,
 				506039F5202BBAA100FC0A72 /* Double Pendulum */,
@@ -192,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50D35C09207C796300DEAEF6 /* Settings.bundle in Resources */,
 				50603A01202BBAA100FC0A72 /* LaunchScreen.storyboard in Resources */,
 				506039FE202BBAA100FC0A72 /* Assets.xcassets in Resources */,
 				506039FC202BBAA100FC0A72 /* Main.storyboard in Resources */,
