@@ -43,16 +43,24 @@
 			<array>
 				<string>Red</string>
 				<string>Orange</string>
+				<string>Lime</string>
+				<string>Green</string>
+				<string>Cyan</string>
 				<string>Blue</string>
+				<string>Violet</string>
 			</array>
 			<key>Values</key>
 			<array>
-				<string>0</string>
-				<string>1</string>
-				<string>2</string>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+				<integer>6</integer>
 			</array>
 			<key>DefaultValue</key>
-			<string>0</string>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>Type</key>

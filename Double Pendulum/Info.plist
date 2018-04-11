@@ -47,5 +47,9 @@
 	</array>
 	<key>NSMotionUsageDescription</key>
 	<string>Accelerometer is used to simulate pendulum motion with real gravity force applied.</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.education</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

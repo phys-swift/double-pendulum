@@ -39,7 +39,7 @@ struct DoublePendulum {
     var target = double2(0)
     
     // MARK: pendulum parameters
-    var omega2 = 6.0
+    var omega2 = 5.0
     var gamma = 1.0
     var theta = 0.0
     
@@ -76,10 +76,9 @@ struct DoublePendulum {
         }
     }
     
-    var g: Double {
-        get { return omega2/6.0 }
-        set { omega2 = 6.0*newValue }
-    }
+    // MARK: physical parameters
+    var g: Double = 1.0 { didSet { omega2 = g/l } }
+    var l: Double = 0.2 { didSet { omega2 = g/l } }
     
     // MARK: cartesian coordinates of the end
     var cartesian: double4 {

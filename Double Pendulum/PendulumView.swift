@@ -13,6 +13,14 @@ import UIKit
     var pendulum = DoublePendulum()
     var trace = History(size: 50, step: UIScreen.main.maximumFramesPerSecond/10)
     
+    // MARK: pendulum trace
+    var displayTrace = true { didSet {
+        guard displayTrace != oldValue else { return }
+        if displayTrace { trace.reset() }
+    } }
+    
+    var traceColor = UIColor.red
+    
     // MARK: simulation states
     enum State: Int { case running, braking, dragging, paused }
     
@@ -25,32 +33,24 @@ import UIKit
         }
     } }
     
-    // MARK: gesture recognizers
-    var pause = UITapGestureRecognizer()
-    var brake = UITapGestureRecognizer()
-    var press = UILongPressGestureRecognizer()
-    var swipe = [UISwipeGestureRecognizer]()
-    
-    // MARK: interface to view controller
-    @objc dynamic var displayTrace = true
-    
-    @objc dynamic var phi: Float {
+    // MARK: view controller interface
+    var phi: Float {
         get { return Float(pendulum.phi) }
         set { pendulum.phi = Double(newValue); trace.reset() }
     }
     
-    @objc dynamic var psi: Float {
+    var psi: Float {
         get { return Float(pendulum.psi) }
         set { pendulum.psi = Double(newValue); trace.reset() }
     }
     
     // MARK: accelerometer access
-    @objc dynamic var gravity = false { didSet {
+    var gravity = false { didSet {
         guard gravity != oldValue else { return }
         guard AppDelegate.motion.isDeviceMotionAvailable else { gravity = false; return }
         
         if gravity { AppDelegate.motion.startDeviceMotionUpdates() }
-        else { AppDelegate.motion.stopDeviceMotionUpdates() }
+        else { AppDelegate.motion.stopDeviceMotionUpdates(); pendulum.theta = 0.0; pendulum.g = 1.0 }
     } }
     
     // MARK: link to display refresh rate timer
@@ -59,6 +59,12 @@ import UIKit
         if let link = oldValue { link.invalidate() }
         if let link = link { link.add(to: .current, forMode: .defaultRunLoopMode) }
     } }
+    
+    // MARK: gesture recognizers
+    var pause = UITapGestureRecognizer()
+    var brake = UITapGestureRecognizer()
+    var press = UILongPressGestureRecognizer()
+    var swipe = [UISwipeGestureRecognizer]()
     
     // MARK: clean up
     deinit { gravity = false; link = nil }
@@ -91,7 +97,7 @@ import UIKit
     // MARK: draw double pendulum
     override func draw(_ rect: CGRect) {
         StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0), braking: simulation == .braking)
-        if displayTrace { drawTrajectory(frame: rect, trace: trace) }
+        if displayTrace { drawTrajectory(frame: rect, trace: trace, color: traceColor) }
     }
     
     // MARK: draw pendulum trajectory
