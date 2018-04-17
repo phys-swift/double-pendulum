@@ -162,12 +162,9 @@ import UIKit
         // update gravity vector
         if gravity, let g = AppDelegate.motion.deviceMotion?.gravity {
             let (x,y) = orient(g.x, -g.y), g2 = x*x + y*y
-            let delta = g2 * (atan2(x,y) - pendulum.theta)
+            let delta = (atan2(x,y) - pendulum.theta).remainder(dividingBy: 2*Double.pi)
             
-            pendulum.theta += delta
-            pendulum.state[0] -= delta
-            pendulum.state[1] -= delta
-            
+            pendulum.theta += g2 * delta
             pendulum.g = sqrt(g2)
         }
         

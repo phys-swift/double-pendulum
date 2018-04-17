@@ -47,11 +47,15 @@ class ViewController: UIViewController {
         return UserDefaults.standard.bool(forKey: "dark") ? .lightContent : .default
     }
     
+    override var shouldAutorotate: Bool {
+        return !(UserDefaults.standard.bool(forKey: "gravity"))
+    }
+    
     @IBAction func defaults(_ sender: Any) {
         let defaults = UserDefaults.standard
         
         let background = defaults.bool(forKey: "dark") ? ViewController.dark : UIColor.white
-        pendulum.backgroundColor = background; pendulum.superview?.backgroundColor = background
+        pendulum.backgroundColor = background; view.backgroundColor = background
         pendulum.traceColor = ViewController.palette[defaults.integer(forKey: "color")]
         pendulum.displayTrace = defaults.bool(forKey: "trace")
         pendulum.gravity = defaults.bool(forKey: "gravity")
@@ -62,6 +66,16 @@ class ViewController: UIViewController {
     
     @IBAction func settings(_ sender: Any) {
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+    }
+    
+    @IBAction func tilt(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(!defaults.bool(forKey: "gravity"), forKey: "gravity")
+    }
+    
+    @IBAction func trace(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(!defaults.bool(forKey: "trace"), forKey: "trace")
     }
 }
 

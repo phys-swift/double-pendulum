@@ -41,7 +41,7 @@ struct DoublePendulum {
     // MARK: pendulum parameters
     var omega2 = 5.0
     var gamma = 1.0
-    var theta = 0.0
+    var theta = 0.0 { didSet { let delta = theta - oldValue; state[0] -= delta; state[1] -= delta } }
     
     // MARK: simulation time
     var time = 0.0
@@ -70,10 +70,7 @@ struct DoublePendulum {
     
     var upsilon: Double {
         get { return (180.0/Double.pi) * theta }
-        set {
-            let delta = (Double.pi/180.0) * (newValue - upsilon)
-            theta += delta; state[0] -= delta; state[1] -= delta
-        }
+        set { theta = (Double.pi/180.0) * upsilon }
     }
     
     // MARK: physical parameters
@@ -210,5 +207,5 @@ struct History {
     
     // MARK: drop a point or reset the buffer entirely
     mutating func drop() { if (tail < head) { tail += 1 } }
-    mutating func reset() { tail = head }
+    mutating func reset() { head = 0; tail = 0 }
 }
