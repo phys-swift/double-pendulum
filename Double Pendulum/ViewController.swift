@@ -88,10 +88,15 @@ class AboutController: UIViewController {
         super.viewDidLoad()
         
         // configure about view
+        about.isScrollEnabled = false
         about.attributedText = AboutController.blurb
         about.adjustsFontForContentSizeCategory = true
         about.textContainerInset = UIEdgeInsets(top: 24, left: 8, bottom: 8, right: 8)
-        about.scrollRangeToVisible(NSMakeRange(0, 1))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        about.isScrollEnabled = true
     }
     
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }

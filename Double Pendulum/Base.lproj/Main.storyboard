@@ -22,33 +22,45 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4Y-9w-Du1">
-                                <rect key="frame" x="19" y="49" width="42" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4Y-9w-Du1">
+                                <rect key="frame" x="19" y="63" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="2Dv-kB-4ck"/>
+                                    <constraint firstAttribute="height" constant="42" id="oxG-Nr-A6O"/>
+                                </constraints>
                                 <state key="normal" title="Settings" image="Gear"/>
                                 <connections>
                                     <action selector="settings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S9W-9a-T0x"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJH-Fu-cBx">
-                                <rect key="frame" x="314" y="49" width="42" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJH-Fu-cBx">
+                                <rect key="frame" x="314" y="63" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="bwa-cz-OHI"/>
+                                    <constraint firstAttribute="height" constant="42" id="cdu-j8-7UW"/>
+                                </constraints>
                                 <state key="normal" title="About" image="Info"/>
                                 <connections>
                                     <segue destination="SEz-Pd-3Ba" kind="presentation" id="ZR3-fP-QkB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ga-EM-w5y">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ga-EM-w5y">
                                 <rect key="frame" x="19" y="751" width="42" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="F95-VR-fWD"/>
+                                    <constraint firstAttribute="height" constant="43" id="e8i-rG-wZf"/>
+                                </constraints>
                                 <state key="normal" title="Tilt" image="Tilt"/>
                                 <connections>
                                     <action selector="tilt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6CE-qw-YEt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiN-bF-9I5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiN-bF-9I5">
                                 <rect key="frame" x="314" y="751" width="42" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="KkJ-S0-ydc"/>
+                                    <constraint firstAttribute="height" constant="42" id="dxG-HN-t28"/>
+                                </constraints>
                                 <state key="normal" title="Trace" image="Trace"/>
                                 <connections>
                                     <action selector="trace:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hlF-X8-QRe"/>
@@ -57,10 +69,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4ga-EM-w5y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="19" id="2km-sO-3MA"/>
+                            <constraint firstItem="SJH-Fu-cBx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="7tq-7f-h52"/>
                             <constraint firstItem="xY1-BG-M8F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FlI-JO-4Yl"/>
+                            <constraint firstAttribute="trailing" secondItem="YiN-bF-9I5" secondAttribute="trailing" constant="19" id="UoR-IT-VRh"/>
+                            <constraint firstAttribute="bottom" secondItem="4ga-EM-w5y" secondAttribute="bottom" constant="18" id="Xcw-fG-CgC"/>
+                            <constraint firstAttribute="trailing" secondItem="SJH-Fu-cBx" secondAttribute="trailing" constant="19" id="Y3k-y4-rTM"/>
                             <constraint firstItem="xY1-BG-M8F" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ZpA-bl-PmA"/>
                             <constraint firstItem="xY1-BG-M8F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fpH-OR-N9b"/>
+                            <constraint firstItem="q4Y-9w-Du1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="hKZ-Sd-q3A"/>
+                            <constraint firstAttribute="bottom" secondItem="YiN-bF-9I5" secondAttribute="bottom" constant="19" id="joV-rg-xb7"/>
                             <constraint firstItem="xY1-BG-M8F" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uIh-ZH-cc7"/>
+                            <constraint firstItem="q4Y-9w-Du1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="19" id="z8Y-iC-G5r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -86,10 +106,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYD-28-dM3">
-                                <rect key="frame" x="309" y="32" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dismiss"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYD-28-dM3">
+                                <rect key="frame" x="314" y="63" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="7ss-ES-5KS"/>
+                                    <constraint firstAttribute="height" constant="42" id="XHO-lb-HHp"/>
+                                </constraints>
+                                <state key="normal" title="Dismiss" image="Dismiss"/>
                                 <connections>
                                     <action selector="dismiss:" destination="SEz-Pd-3Ba" eventType="touchUpInside" id="9I4-1X-mZH"/>
                                 </connections>
@@ -97,7 +120,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nYD-28-dM3" secondAttribute="trailing" constant="19" id="3jB-n7-E9e"/>
                             <constraint firstItem="gaB-I2-E6U" firstAttribute="top" secondItem="zco-lv-TuS" secondAttribute="top" id="7Tj-7D-D7c"/>
+                            <constraint firstItem="nYD-28-dM3" firstAttribute="top" secondItem="zco-lv-TuS" secondAttribute="top" constant="19" id="OVS-RS-31c"/>
                             <constraint firstItem="gaB-I2-E6U" firstAttribute="bottom" secondItem="zco-lv-TuS" secondAttribute="bottom" id="Ttd-sW-jIn"/>
                             <constraint firstItem="gaB-I2-E6U" firstAttribute="leading" secondItem="zco-lv-TuS" secondAttribute="leading" id="k3g-tI-H8n"/>
                             <constraint firstItem="gaB-I2-E6U" firstAttribute="trailing" secondItem="zco-lv-TuS" secondAttribute="trailing" id="nmp-8J-rd7"/>
@@ -114,6 +139,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Dismiss" width="42" height="42"/>
         <image name="Gear" width="42" height="42"/>
         <image name="Info" width="42" height="42"/>
         <image name="Tilt" width="42" height="43"/>

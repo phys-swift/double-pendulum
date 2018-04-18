@@ -33,8 +33,8 @@ Have Fun!
 let about: NSAttributedString = {
     // logo attachment
     let logo = NSTextAttachment(); logo.image = UIImage(named: "SFU")
-    let w = UIScreen.main.fixedCoordinateSpace.bounds.width - 32, h = w/6.9
-    logo.bounds = CGRect(origin: CGPoint.zero, size: CGSize(width: w, height: h))
+    let w = UIScreen.main.fixedCoordinateSpace.bounds.width - 88
+    logo.bounds = CGRect(x: 0, y: 0, width: w, height: w/6.9)
     
     // paragraph styles
     let style = NSMutableParagraphStyle()
