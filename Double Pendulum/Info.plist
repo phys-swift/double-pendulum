@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Pendulum</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -12,16 +14,18 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Pendulum</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>003</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.education</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMotionUsageDescription</key>
+	<string>Accelerometer is used to simulate pendulum motion with real gravity force applied.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -45,10 +49,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSMotionUsageDescription</key>
-	<string>Accelerometer is used to simulate pendulum motion with real gravity force applied.</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.education</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
