@@ -379,7 +379,7 @@ public class StyleKit : NSObject {
                 .font: UIFont.systemFont(ofSize: 360, weight: .medium),
                 .foregroundColor: StyleKit.orange,
                 .paragraphStyle: warningStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
 
             let warningTextHeight: CGFloat = warningTextContent.boundingRect(with: CGSize(width: warningRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: warningFontAttributes, context: nil).height
             context.saveGState()

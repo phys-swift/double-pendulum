@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func settings(_ sender: Any) {
-        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
     
     @IBAction func tilt(_ sender: Any) {

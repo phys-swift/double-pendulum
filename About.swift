@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: magic character representing attachment in attributed strings
-let attachment = Character(Unicode.Scalar(NSAttachmentCharacter)!)
+let attachment = Character(Unicode.Scalar(NSTextAttachment.character)!)
 
 // MARK: plain text about blurb
 let blurb: String = """
@@ -42,22 +42,22 @@ let about: NSAttributedString = {
     style.alignment = .center;  let center = style.copy()
     
     // common attributes
-    let body: [NSAttributedStringKey: Any] = [
+    let body: [NSAttributedString.Key: Any] = [
         .paragraphStyle: normal,
         .font: UIFont.preferredFont(forTextStyle: .body)
     ]
     
-    let title: [NSAttributedStringKey: Any] = [
+    let title: [NSAttributedString.Key: Any] = [
         .paragraphStyle: center,
         .font: UIFont.preferredFont(forTextStyle: .title1)
     ]
     
-    let heading: [NSAttributedStringKey: Any] = [
+    let heading: [NSAttributedString.Key: Any] = [
         .font: UIFont.preferredFont(forTextStyle: .headline)
     ]
     
-    let gesture: [NSAttributedStringKey: Any] = [
-        .underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+    let gesture: [NSAttributedString.Key: Any] = [
+        .underlineStyle: NSUnderlineStyle.single.rawValue
     ]
     
     // attributed about text
@@ -74,16 +74,16 @@ let about: NSAttributedString = {
         "long-press": gesture,
         "swipe": gesture,
         "tap with two fingers": gesture,
-        "Settings": [NSAttributedStringKey.link: UIApplicationOpenSettingsURLString],
-        "derived here": [NSAttributedStringKey.link: "https://en.wikipedia.org/wiki/Double_pendulum"],
-        "Gauss-Legendre method": [NSAttributedStringKey.link: "https://doi.org/10.1090/S0025-5718-1964-0159424-9"],
-        "symplectic form": [NSAttributedStringKey.link: "https://en.wikipedia.org/wiki/Symplectic_integrator"],
-        "Hamiltonian systems": [NSAttributedStringKey.link: "https://en.wikipedia.org/wiki/Hamiltonian_mechanics"],
-        "Rayleigh dissipation": [NSAttributedStringKey.link: "https://en.wikipedia.org/wiki/Lagrangian_mechanics#Extensions_to_include_non-conservative_forces"],
-        "Cosmology Group": [NSAttributedStringKey.link: "http://www.sfu.ca/physics/cosmology/"],
-        "Physics Department": [NSAttributedStringKey.link: "https://www.sfu.ca/physics.html"],
-        "Simon Fraser University": [NSAttributedStringKey.link: "https://www.sfu.ca/"],
-        "physics courses": [NSAttributedStringKey.link: "https://www.sfu.ca/physics/courses/yearly-offerings.html"]
+        "Settings": [NSAttributedString.Key.link: UIApplication.openSettingsURLString],
+        "derived here": [NSAttributedString.Key.link: "https://en.wikipedia.org/wiki/Double_pendulum"],
+        "Gauss-Legendre method": [NSAttributedString.Key.link: "https://doi.org/10.1090/S0025-5718-1964-0159424-9"],
+        "symplectic form": [NSAttributedString.Key.link: "https://en.wikipedia.org/wiki/Symplectic_integrator"],
+        "Hamiltonian systems": [NSAttributedString.Key.link: "https://en.wikipedia.org/wiki/Hamiltonian_mechanics"],
+        "Rayleigh dissipation": [NSAttributedString.Key.link: "https://en.wikipedia.org/wiki/Lagrangian_mechanics#Extensions_to_include_non-conservative_forces"],
+        "Cosmology Group": [NSAttributedString.Key.link: "http://www.sfu.ca/physics/cosmology/"],
+        "Physics Department": [NSAttributedString.Key.link: "https://www.sfu.ca/physics.html"],
+        "Simon Fraser University": [NSAttributedString.Key.link: "https://www.sfu.ca/"],
+        "physics courses": [NSAttributedString.Key.link: "https://www.sfu.ca/physics/courses/yearly-offerings.html"]
     ] {
         guard let range = blurb.range(of: tag, options: .caseInsensitive) else { continue }
         about.addAttributes(style, range: NSMakeRange(range.lowerBound.encodedOffset, tag.count))

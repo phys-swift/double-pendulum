@@ -57,7 +57,7 @@ import UIKit
     var link: CADisplayLink? = nil { didSet {
         guard link != oldValue else { return }
         if let link = oldValue { link.invalidate() }
-        if let link = link { link.add(to: .current, forMode: .defaultRunLoopMode) }
+        if let link = link { link.add(to: .current, forMode: RunLoop.Mode.default) }
     } }
     
     // MARK: gesture recognizers
@@ -86,7 +86,7 @@ import UIKit
         press.addTarget(self, action: #selector(drag)); addGestureRecognizer(press)
         
         // add swipe recognizers
-        let directions: [UISwipeGestureRecognizerDirection] = [.left, .right, .up, .down]
+        let directions: [UISwipeGestureRecognizer.Direction] = [.left, .right, .up, .down]
         for direction in directions {
             let swipe = UISwipeGestureRecognizer()
             swipe.direction = direction; self.swipe.append(swipe)
