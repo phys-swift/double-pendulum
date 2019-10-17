@@ -70,7 +70,7 @@ struct DoublePendulum {
     
     var upsilon: Double {
         get { return (180.0/Double.pi) * theta }
-        set { theta = (Double.pi/180.0) * upsilon }
+        set { theta = (Double.pi/180.0) * newValue }
     }
     
     // MARK: physical parameters
