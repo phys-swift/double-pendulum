@@ -85,8 +85,8 @@ let about: NSAttributedString = {
         "Simon Fraser University": [NSAttributedString.Key.link: "https://www.sfu.ca/"],
         "physics courses": [NSAttributedString.Key.link: "https://www.sfu.ca/physics/courses/yearly-offerings.html"]
     ] {
-        guard let range = blurb.range(of: tag, options: .caseInsensitive) else { continue }
-        about.addAttributes(style, range: NSMakeRange(range.lowerBound.encodedOffset, tag.count))
+        let range = (blurb as NSString).range(of: tag, options: .caseInsensitive)
+        if (range.location != NSNotFound) { about.addAttributes(style, range: range) }
     }
     
     return NSAttributedString(attributedString: about)
