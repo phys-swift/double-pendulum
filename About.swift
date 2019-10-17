@@ -11,6 +11,15 @@ import UIKit
 // MARK: magic character representing attachment in attributed strings
 let attachment = Character(Unicode.Scalar(NSTextAttachment.character)!)
 
+// MARK: platform-specific instructions and settings
+#if !targetEnvironment(macCatalyst)
+let margin: CGFloat = 88
+let interact = "Tap with one finger within the circle to stop the pendulum; long-press to grab it by the end and drag it around. Swipe within the inner circle to give the first arm a kick, or within the outer circle to give the second arm a kick in the direction of the swipe. Tap with two fingers to pause or resume the simulation. If the motion of the pendulum gets too fast, emergency brakes will engage. You can control the simulation using real gravity and your device orientation if you enable it in Settings."
+#else
+let margin: CGFloat = 320
+let interact = "Click within the circle to stop the pendulum; click and hold to grab it by the end and drag it around. If the motion of the pendulum gets too fast, emergency brakes will engage."
+#endif
+
 // MARK: plain text about blurb
 let blurb: String = """
 \(attachment)
@@ -18,7 +27,7 @@ let blurb: String = """
 The double pendulum is a simple mechanical system that displays chaos. The motion of the pendulum arms can be complex and unpredictable, with even minute changes leading to very different trajectories. This app accurately simulates the physics of a frictionless double pendulum, so you can explore and enjoy the complexity and beauty of mechanical chaos.
 
 Interacting with the pendulum:
-Tap with one finger within the circle to stop the pendulum; long-press to grab it by the end and drag it around. Swipe within the inner circle to give the first arm a kick, or within the outer circle to give the second arm a kick in the direction of the swipe. Tap with two fingers to pause or resume the simulation. If the motion of the pendulum gets too fast, emergency brakes will engage. You can control the simulation using real gravity and your device orientation if you enable it in Settings.
+\(interact)
 
 What exactly is being computed here?
 The equations of motion for a double pendulum are derived here. They are integrated numerically using an eighth-order Gauss-Legendre method, which is highly accurate and preserves the symplectic form for Hamiltonian systems. Dragging the pendulum by the end actually solves the equations of motion of a double pendulum with a spring attached between its end and your finger. Viscous friction which is used to damp the pendulum motion while dragging and braking is modelled by Rayleigh dissipation.
@@ -33,7 +42,7 @@ Have Fun!
 let about: NSAttributedString = {
     // logo attachment
     let logo = NSTextAttachment(); logo.image = UIImage(named: "SFU")
-    let w = UIScreen.main.fixedCoordinateSpace.bounds.width - 88
+    let w = UIScreen.main.fixedCoordinateSpace.bounds.width - margin
     logo.bounds = CGRect(x: 0, y: 0, width: w, height: w/6.9)
     
     // paragraph styles
@@ -73,6 +82,8 @@ let about: NSAttributedString = {
         "tap": gesture,
         "long-press": gesture,
         "swipe": gesture,
+        "click": gesture,
+        "click and hold": gesture,
         "tap with two fingers": gesture,
         "Settings": [NSAttributedString.Key.link: UIApplication.openSettingsURLString],
         "derived here": [NSAttributedString.Key.link: "https://en.wikipedia.org/wiki/Double_pendulum"],
