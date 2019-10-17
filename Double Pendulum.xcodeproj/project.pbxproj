@@ -32,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50106301235905B9001398CC /* Double Pendulum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Double Pendulum.entitlements"; sourceTree = "<group>"; };
 		506039F3202BBAA100FC0A72 /* Double Pendulum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Double Pendulum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		506039F6202BBAA100FC0A72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		506039F8202BBAA100FC0A72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		506039F5202BBAA100FC0A72 /* Double Pendulum */ = {
 			isa = PBXGroup;
 			children = (
+				50106301235905B9001398CC /* Double Pendulum.entitlements */,
 				506039F6202BBAA100FC0A72 /* AppDelegate.swift */,
 				506039F8202BBAA100FC0A72 /* ViewController.swift */,
 				50603A0E202BBDB700FC0A72 /* PendulumView.swift */,
@@ -163,12 +165,12 @@
 				TargetAttributes = {
 					506039F2202BBAA100FC0A72 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 					50F4A37220304ECD009A7B3A = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 506039F2202BBAA100FC0A72;
 					};
@@ -226,7 +228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nbuild=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:8:DefaultValue $version ($build)\" \"$CODESIGNING_FOLDER_PATH/Settings.bundle/Root.plist\"";
+			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nbuild=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nresources=\"$CODESIGNING_FOLDER_PATH/../$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:8:DefaultValue $version ($build)\" \"$resources/Settings.bundle/Root.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -398,13 +400,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Double Pendulum/Double Pendulum.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 28GCAU455A;
 				INFOPLIST_FILE = "Double Pendulum/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.sfu.phys.pendulum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -413,13 +418,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Double Pendulum/Double Pendulum.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 28GCAU455A;
 				INFOPLIST_FILE = "Double Pendulum/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.sfu.phys.pendulum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -434,7 +442,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.sfu.phys.simulator-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Double Pendulum.app/Double Pendulum";
 			};
@@ -450,7 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.sfu.phys.simulator-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Double Pendulum.app/Double Pendulum";
 			};
