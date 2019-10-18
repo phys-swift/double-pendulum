@@ -14,23 +14,25 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Dark Background</string>
+			<string>Background</string>
 			<key>Key</key>
-			<string>dark</string>
+			<string>background</string>
+			<key>Titles</key>
+			<array>
+				<string>Default</string>
+				<string>Light</string>
+				<string>Dark</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
 			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Show Trace</string>
-			<key>Key</key>
-			<string>trace</string>
-			<key>DefaultValue</key>
-			<true/>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -61,6 +63,16 @@
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Show Trace</string>
+			<key>Key</key>
+			<string>trace</string>
+			<key>DefaultValue</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>Type</key>

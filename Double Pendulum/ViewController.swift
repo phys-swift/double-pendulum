@@ -40,28 +40,47 @@ class ViewController: UIViewController {
     ]
     
     static func defaults() {
-        UserDefaults.standard.register(defaults: ["dark": false, "trace": true, "color": 0, "speed": 1, "gravity": false])
+        UserDefaults.standard.register(defaults: ["background": 0, "color": 0, "trace": true, "speed": 1, "gravity": false])
+    }
+    
+    var darkMode: Bool {
+        switch (UserDefaults.standard.integer(forKey: "background")) {
+            case 0: if #available(iOS 13.0, *) { return traitCollection.userInterfaceStyle == .dark } else { return false }
+            case 1: return false
+            case 2: return true
+            default: return false
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UserDefaults.standard.bool(forKey: "dark") ? .lightContent : .default
+        if #available(iOS 13.0, *) { return darkMode ? .lightContent : .darkContent } else { return darkMode ? .lightContent : .default }
     }
     
     override var shouldAutorotate: Bool {
         return !(UserDefaults.standard.bool(forKey: "gravity"))
     }
     
-    @IBAction func defaults(_ sender: Any) {
-        let defaults = UserDefaults.standard
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         
-        let background = defaults.bool(forKey: "dark") ? ViewController.dark : UIColor.white
+        guard #available(iOS 13.0, *) else { return }
+        if let p = previousTraitCollection, p.hasDifferentColorAppearance(comparedTo: traitCollection) { restyle(self) }
+    }
+    
+    @IBAction func restyle(_ sender: Any) {
+        let background = darkMode ? ViewController.dark : UIColor.white
         pendulum.backgroundColor = background; view.backgroundColor = background
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    @IBAction func defaults(_ sender: Any) {
+        let defaults = UserDefaults.standard; restyle(self)
+        
         pendulum.traceColor = ViewController.palette[defaults.integer(forKey: "color")]
         pendulum.displayTrace = defaults.bool(forKey: "trace")
         pendulum.gravity = defaults.bool(forKey: "gravity")
         
         pendulum.pendulum.l = [0.5, 0.2, 0.1][defaults.integer(forKey: "speed")]
-        setNeedsStatusBarAppearanceUpdate()
     }
     
     @IBAction func settings(_ sender: Any) {
@@ -86,6 +105,9 @@ class AboutController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // about page is always light
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = .light }
         
         // configure about view
         about.isScrollEnabled = false
