@@ -13,10 +13,8 @@ let attachment = Character(Unicode.Scalar(NSTextAttachment.character)!)
 
 // MARK: platform-specific instructions and settings
 #if !targetEnvironment(macCatalyst)
-let margin: CGFloat = 88
 let interact = "Tap with one finger within the circle to stop the pendulum; long-press to grab it by the end and drag it around. Swipe within the inner circle to give the first arm a kick, or within the outer circle to give the second arm a kick in the direction of the swipe. Tap with two fingers to pause or resume the simulation. If the motion of the pendulum gets too fast, emergency brakes will engage. You can control the simulation using real gravity and your device orientation if you enable it in Settings."
 #else
-let margin: CGFloat = 320
 let interact = "Click within the circle to stop the pendulum; click and hold to grab it by the end and drag it around. If the motion of the pendulum gets too fast, emergency brakes will engage."
 #endif
 
@@ -42,7 +40,7 @@ Have Fun!
 let about: NSAttributedString = {
     // logo attachment
     let logo = NSTextAttachment(); logo.image = UIImage(named: "SFU")
-    let w = UIScreen.main.fixedCoordinateSpace.bounds.width - margin
+    let w = min(UIScreen.main.fixedCoordinateSpace.bounds.width, 700) - 88
     logo.bounds = CGRect(x: 0, y: 0, width: w, height: w/6.9)
     
     // paragraph styles
