@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     ]
     
     static func defaults() {
-        UserDefaults.standard.register(defaults: ["background": 0, "color": 0, "trace": true, "speed": 1, "gravity": false])
+        UserDefaults.standard.register(defaults: ["background": 0, "color": 0, "trace": true, "arms": true, "speed": 1, "gravity": false])
     }
     
     var darkMode: Bool {
@@ -75,9 +75,12 @@ class ViewController: UIViewController {
     
     @IBAction func defaults(_ sender: Any) {
         let defaults = UserDefaults.standard; restyle(self)
+        let color = defaults.integer(forKey: "color")
         
-        pendulum.traceColor = ViewController.palette[defaults.integer(forKey: "color")]
+        pendulum.traceColor = ViewController.palette[color != -1 ? color : 0]
+        pendulum.gradient = color == -1
         pendulum.displayTrace = defaults.bool(forKey: "trace")
+        pendulum.showArms = defaults.bool(forKey: "arms")
         pendulum.gravity = defaults.bool(forKey: "gravity")
         
         pendulum.pendulum.l = [0.5, 0.2, 0.1][defaults.integer(forKey: "speed")]
@@ -95,6 +98,11 @@ class ViewController: UIViewController {
     @IBAction func trace(_ sender: Any) {
         let defaults = UserDefaults.standard
         defaults.set(!defaults.bool(forKey: "trace"), forKey: "trace")
+    }
+    
+    @IBAction func arms(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(!defaults.bool(forKey: "arms"), forKey: "arms")
     }
 }
 

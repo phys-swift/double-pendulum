@@ -50,6 +50,7 @@
 				<string>Cyan</string>
 				<string>Blue</string>
 				<string>Violet</string>
+				<string>Gradient</string>
 			</array>
 			<key>Values</key>
 			<array>
@@ -60,6 +61,7 @@
 				<integer>4</integer>
 				<integer>5</integer>
 				<integer>6</integer>
+				<string>-1</string>
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>
@@ -71,6 +73,16 @@
 			<string>Show Trace</string>
 			<key>Key</key>
 			<string>trace</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Show Arms and Weights</string>
+			<key>Key</key>
+			<string>arms</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
