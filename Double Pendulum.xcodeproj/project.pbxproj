@@ -228,7 +228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\n#build=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nresources=\"$CODESIGNING_FOLDER_PATH/../$UNLOCALIZED_RESOURCES_FOLDER_PATH\"; build=$CURRENT_PROJECT_VERSION \n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:8:DefaultValue $version ($build)\" \"$resources/Settings.bundle/Root.plist\"\n";
+			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\n#build=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nresources=\"$CODESIGNING_FOLDER_PATH/../$UNLOCALIZED_RESOURCES_FOLDER_PATH\"; build=$CURRENT_PROJECT_VERSION \n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:9:DefaultValue $version ($build)\" \"$resources/Settings.bundle/Root.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

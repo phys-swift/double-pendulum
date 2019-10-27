@@ -19,8 +19,14 @@ import UIKit
         if displayTrace { trace.reset() }
     } }
     
-    var traceColor = UIColor.red
+    var showArms = true { didSet {
+        guard showArms != oldValue else { return }
+        if showArms { trace.reset() }
+    } }
     
+    var traceColor = UIColor.red
+    var gradient = false
+
     // MARK: simulation states
     enum State: Int { case running, braking, dragging, paused }
     
@@ -94,14 +100,31 @@ import UIKit
         }
     }
     
+    let palette = [
+        UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.0), // red
+        UIColor(red: 1.000, green: 0.667, blue: 0.000, alpha: 1.0), // orange
+        UIColor(red: 0.500, green: 1.000, blue: 0.000, alpha: 1.0), // lime
+        UIColor(red: 0.000, green: 0.500, blue: 0.125, alpha: 1.0), // green
+        UIColor(red: 0.000, green: 0.850, blue: 1.000, alpha: 1.0), // cyan
+        UIColor(red: 0.000, green: 0.000, blue: 0.850, alpha: 1.0), // blue
+        UIColor(red: 0.425, green: 0.000, blue: 1.000, alpha: 1.0)  // violet
+    ]
+    
     // MARK: draw double pendulum
     override func draw(_ rect: CGRect) {
-        StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0), braking: simulation == .braking)
-        if displayTrace { drawTrajectory(frame: rect, trace: trace, color: traceColor) }
+        if showArms {
+            StyleKit.drawDoublePendulum(frame: rect, phi: CGFloat(pendulum.phi), psi: CGFloat(pendulum.psi), upsilon: CGFloat(pendulum.upsilon), g: CGFloat(gravity ? pendulum.g : 0.0), braking: simulation == .braking)
+        }
+        if displayTrace { drawTrajectory(frame: rect, trace: trace) }
+    }
+    
+    func colorFromTime(_ t: Double) -> UIColor {
+        let tInt = Int(t)
+        return palette.interpolate(tInt, fraction: t - Double(tInt))
     }
     
     // MARK: draw pendulum trajectory
-    func drawTrajectory(frame rect: CGRect, trace: History, color: UIColor = UIColor.red) {
+    func drawTrajectory(frame rect: CGRect, trace: History) {
         guard trace.count > 1, let context = UIGraphicsGetCurrentContext() else { return }
         
         // save context
@@ -122,6 +145,8 @@ import UIKit
         for i in 0..<trace.count-1 {
             // control point coordinates
             let (t1,q1) = trace[i], (t2,q2) = trace[i+1], dt = (t2-t1)/3.0, alpha = (t2-t0)/(t8-t0)
+            let color = gradient ? colorFromTime(t1) : traceColor
+
             let p1 = CGPoint(x: q1[0], y: q1[1]), p2 = CGPoint(x: q1[0]+q1[2]*dt, y: q1[1]+q1[3]*dt)
             let p4 = CGPoint(x: q2[0], y: q2[1]), p3 = CGPoint(x: q2[0]-q2[2]*dt, y: q2[1]-q2[3]*dt)
             
@@ -248,5 +273,38 @@ import UIKit
         case (.left,_,1...2), (.right,_,2...3), (.up,1...2,_), (.down,2...3,_): pendulum.kick(-3,0)
         default: break
         }
+    }
+}
+
+extension Array where Element : UIColor {
+    func interpolate(_ i: Int, fraction: Double) -> UIColor {
+        let count = self.count - 1
+        let t1 = i % count
+        let t2 = (t1 + 1) % count
+        return self[t1].interpolate(self[t2], fraction)
+    }
+}
+
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return (red, green, blue, alpha)
+    }
+    
+    func interpolate(_ color2: UIColor, _ fraction: Double) -> UIColor {
+        let c1 = self.rgba
+        let c2 = color2.rgba
+        let r = c1.red.interpolate(c2.red, fraction)
+        let g = c1.green.interpolate(c2.green, fraction)
+        let b = c1.blue.interpolate(c2.blue, fraction)
+        let a = c1.alpha.interpolate(c2.alpha, fraction)
+        return UIColor(red: r, green: g, blue: b, alpha: a)
+    }
+}
+
+extension CGFloat {
+    func interpolate(_ v2: CGFloat, _ fraction: Double) -> CGFloat {
+        return ((v2 - self) * CGFloat(fraction)) + self
     }
 }
